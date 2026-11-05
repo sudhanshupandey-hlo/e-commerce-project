@@ -1,0 +1,902 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Products - MyShop</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            background: #222;
+            color: white;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h1 {
+            font-size: 24px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        nav a:hover {
+            color: #ff9800;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .page-title h2 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            color: #777;
+        }
+
+        /* ================= FILTERS ================= */
+
+        .filters {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .filters input,
+        .filters select {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .filters input:focus,
+        .filters select:focus {
+            border-color: #ff9800;
+        }
+
+        /* ================= PRODUCTS ================= */
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .product-content {
+            padding: 18px;
+        }
+
+        .product-content h3 {
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .description {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .rating {
+            color: #ff9800;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .old-price {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 14px;
+            margin-left: 5px;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .add-cart {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background: #ff9800;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .add-cart:hover {
+            background: #e68900;
+        }
+
+        /* ================= NO PRODUCTS ================= */
+
+        .no-products {
+            display: none;
+            text-align: center;
+            background: white;
+            padding: 50px;
+            border-radius: 10px;
+            color: #777;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1000px) {
+
+            .products {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 750px) {
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .filters {
+                flex-direction: column;
+            }
+
+            nav {
+                padding: 15px 5%;
+            }
+
+            nav a {
+                margin-left: 10px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <h1>MyShop</h1>
+
+        <div>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="products.html">
+                Products
+            </a>
+
+            <a href="cart.html">
+                Cart
+            </a>
+
+            <a href="orders.html">
+                Orders
+            </a>
+
+            <a href="login.html">
+                Login
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="container">
+
+
+        <!-- Page Title -->
+
+        <div class="page-title">
+
+            <h2>Our Products</h2>
+
+            <p>
+                Find the best products at the best prices.
+            </p>
+
+        </div>
+
+
+        <!-- ================= FILTERS ================= -->
+
+        <div class="filters">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search products..."
+                onkeyup="filterProducts()"
+            >
+
+
+            <select
+                id="categoryFilter"
+                onchange="filterProducts()"
+            >
+
+                <option value="all">
+                    All Categories
+                </option>
+
+                <option value="electronics">
+                    Electronics
+                </option>
+
+                <option value="fashion">
+                    Fashion
+                </option>
+
+                <option value="shoes">
+                    Shoes
+                </option>
+
+                <option value="accessories">
+                    Accessories
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- ================= PRODUCTS ================= -->
+
+        <div
+            class="products"
+            id="productsContainer"
+        >
+
+
+            <!-- Product 1 -->
+
+            <div
+                class="product-card"
+                data-category="electronics"
+                data-name="wireless headphones"
+            >
+
+                <img
+                    class="product-image"
+                    src="https://via.placeholder.com/400x300"
+                    alt="Wireless Headphones"
+                >
+
+                <div class="product-content">
+
+                    <h3>
+                        Wireless Headphones
+                    </h3>
+
+                    <p class="description">
+                        High quality wireless headphones
+                        with excellent sound.
+                    </p>
+
+                    <div class="rating">
+                        ★★★★★
+                    </div>
+
+                    <div class="price">
+                        ₹1,499
+
+                        <span class="old-price">
+                            ₹1,999
+                        </span>
+                    </div>
+
+                    <button
+                        class="add-cart"
+                        onclick="addToCart('Wireless Headphones', 1499)"
+                    >
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Product 2 -->
+
+            <div
+                class="product-card"
+                data-category="electronics"
+                data-name="smart watch"
+            >
+
+                <img
+                    class="product-image"
+                    src="https://via.placeholder.com/400x300"
+                    alt="Smart Watch"
+                >
+
+                <div class="product-content">
+
+                    <h3>
+                        Smart Watch
+                    </h3>
+
+                    <p class="description">
+                        Smart fitness watch with
+                        health tracking features.
+                    </p>
+
+                    <div class="rating">
+                        ★★★★☆
+                    </div>
+
+                    <div class="price">
+                        ₹2,999
+
+                        <span class="old-price">
+                            ₹3,999
+                        </span>
+                    </div>
+
+                    <button
+                        class="add-cart"
+                        onclick="addToCart('Smart Watch', 2999)"
+                    >
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Product 3 -->
+
+            <div
+                class="product-card"
+                data-category="shoes"
+                data-name="running shoes"
+            >
+
+                <img
+                    class="product-image"
+                    src="https://via.placeholder.com/400x300"
+                    alt="Running Shoes"
+                >
+
+                <div class="product-content">
+
+                    <h3>
+                        Running Shoes
+                    </h3>
+
+                    <p class="description">
+                        Comfortable running shoes
+                        suitable for daily workouts.
+                    </p>
+
+                    <div class="rating">
+                        ★★★★★
+                    </div>
+
+                    <div class="price">
+                        ₹2,499
+
+                        <span class="old-price">
+                            ₹3,199
+                        </span>
+                    </div>
+
+                    <button
+                        class="add-cart"
+                        onclick="addToCart('Running Shoes', 2499)"
+                    >
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Product 4 -->
+
+            <div
+                class="product-card"
+                data-category="fashion"
+                data-name="casual t shirt"
+            >
+
+                <img
+                    class="product-image"
+                    src="https://via.placeholder.com/400x300"
+                    alt="Casual T-Shirt"
+                >
+
+                <div class="product-content">
+
+                    <h3>
+                        Casual T-Shirt
+                    </h3>
+
+                    <p class="description">
+                        Comfortable cotton t-shirt
+                        for everyday wear.
+                    </p>
+
+                    <div class="rating">
+                        ★★★★☆
+                    </div>
+
+                    <div class="price">
+                        ₹599
+
+                        <span class="old-price">
+                            ₹899
+                        </span>
+                    </div>
+
+                    <button
+                        class="add-cart"
+                        onclick="addToCart('Casual T-Shirt', 599)"
+                    >
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Product 5 -->
+
+            <div
+                class="product-card"
+                data-category="electronics"
+                data-name="bluetooth speaker"
+            >
+
+                <img
+                    class="product-image"
+                    src="https://via.placeholder.com/400x300"
+                    alt="Bluetooth Speaker"
+                >
+
+                <div class="product-content">
+
+                    <h3>
+                        Bluetooth Speaker
+                    </h3>
+
+                    <p class="description">
+                        Portable Bluetooth speaker
+                        with powerful sound.
+                    </p>
+
+                    <div class="rating">
+                        ★★★★☆
+                    </div>
+
+                    <div class="price">
+                        ₹1,299
+
+                        <span class="old-price">
+                            ₹1,799
+                        </span>
+                    </div>
+
+                    <button
+                        class="add-cart"
+                        onclick="addToCart('Bluetooth Speaker', 1299)"
+                    >
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Product 6 -->
+
+            <div
+                class="product-card"
+                data-category="accessories"
+                data-name="leather wallet"
+            >
+
+                <img
+                    class="product-image"
+                    src="https://via.placeholder.com/400x300"
+                    alt="Leather Wallet"
+                >
+
+                <div class="product-content">
+
+                    <h3>
+                        Leather Wallet
+                    </h3>
+
+                    <p class="description">
+                        Premium leather wallet
+                        with multiple card slots.
+                    </p>
+
+                    <div class="rating">
+                        ★★★★★
+                    </div>
+
+                    <div class="price">
+                        ₹799
+
+                        <span class="old-price">
+                            ₹1,199
+                        </span>
+                    </div>
+
+                    <button
+                        class="add-cart"
+                        onclick="addToCart('Leather Wallet', 799)"
+                    >
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Product 7 -->
+
+            <div
+                class="product-card"
+                data-category="fashion"
+                data-name="denim jacket"
+            >
+
+                <img
+                    class="product-image"
+                    src="https://via.placeholder.com/400x300"
+                    alt="Denim Jacket"
+                >
+
+                <div class="product-content">
+
+                    <h3>
+                        Denim Jacket
+                    </h3>
+
+                    <p class="description">
+                        Stylish denim jacket
+                        for casual occasions.
+                    </p>
+
+                    <div class="rating">
+                        ★★★★☆
+                    </div>
+
+                    <div class="price">
+                        ₹1,899
+
+                        <span class="old-price">
+                            ₹2,499
+                        </span>
+                    </div>
+
+                    <button
+                        class="add-cart"
+                        onclick="addToCart('Denim Jacket', 1899)"
+                    >
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Product 8 -->
+
+            <div
+                class="product-card"
+                data-category="accessories"
+                data-name="backpack"
+            >
+
+                <img
+                    class="product-image"
+                    src="https://via.placeholder.com/400x300"
+                    alt="Backpack"
+                >
+
+                <div class="product-content">
+
+                    <h3>
+                        Backpack
+                    </h3>
+
+                    <p class="description">
+                        Durable backpack suitable
+                        for college and travel.
+                    </p>
+
+                    <div class="rating">
+                        ★★★★★
+                    </div>
+
+                    <div class="price">
+                        ₹1,099
+
+                        <span class="old-price">
+                            ₹1,499
+                        </span>
+                    </div>
+
+                    <button
+                        class="add-cart"
+                        onclick="addToCart('Backpack', 1099)"
+                    >
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- No Products -->
+
+        <div
+            class="no-products"
+            id="noProducts"
+        >
+
+            <h2>
+                No Products Found
+            </h2>
+
+            <p>
+                Try searching for another product.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            &copy; 2026 MyShop. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /*
+         * Search + Category Filter
+         */
+
+        function filterProducts() {
+
+            const searchValue =
+                document
+                    .getElementById("searchInput")
+                    .value
+                    .toLowerCase();
+
+            const category =
+                document
+                    .getElementById("categoryFilter")
+                    .value;
+
+            const products =
+                document.querySelectorAll(
+                    ".product-card"
+                );
+
+            let visibleProducts = 0;
+
+
+            products.forEach(function(product) {
+
+                const name =
+                    product.dataset.name;
+
+                const productCategory =
+                    product.dataset.category;
+
+
+                const matchesSearch =
+                    name.includes(searchValue);
+
+                const matchesCategory =
+                    category === "all" ||
+                    productCategory === category;
+
+
+                if (
+                    matchesSearch &&
+                    matchesCategory
+                ) {
+
+                    product.style.display = "block";
+
+                    visibleProducts++;
+
+                } else {
+
+                    product.style.display = "none";
+
+                }
+
+            });
+
+
+            const noProducts =
+                document.getElementById(
+                    "noProducts"
+                );
+
+
+            if (visibleProducts === 0) {
+
+                noProducts.style.display = "block";
+
+            } else {
+
+                noProducts.style.display = "none";
+
+            }
+
+        }
+
+
+        /*
+         * Add Product To Cart
+         */
+
+        function addToCart(name, price) {
+
+            let cart =
+                JSON.parse(
+                    localStorage.getItem("cart")
+                ) || [];
+
+
+            const existingProduct =
+                cart.find(
+                    product => product.name === name
+                );
+
+
+            if (existingProduct) {
+
+                existingProduct.quantity++;
+
+            } else {
+
+                cart.push({
+
+                    name: name,
+                    price: price,
+                    quantity: 1
+
+                });
+
+            }
+
+
+            localStorage.setItem(
+                "cart",
+                JSON.stringify(cart)
+            );
+
+
+            alert(
+                name + " added to cart!"
+            );
+
+        }
+
+    </script>
+
+</body>
+
+</html>
+```

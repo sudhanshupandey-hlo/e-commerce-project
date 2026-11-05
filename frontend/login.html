@@ -1,0 +1,394 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - MyShop</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar */
+        nav {
+            background: #222;
+            color: white;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h1 {
+            font-size: 24px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        nav a:hover {
+            color: #ff9800;
+        }
+
+        /* Login Container */
+        .login-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 420px;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #222;
+        }
+
+        .login-box .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #ff9800;
+        }
+
+        /* Password */
+        .password-box {
+            position: relative;
+        }
+
+        .password-box input {
+            padding-right: 70px;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            color: #ff9800;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Options */
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0 20px;
+            font-size: 14px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .forgot-password {
+            color: #ff9800;
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        /* Login Button */
+        .login-btn {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 6px;
+            background: #ff9800;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background: #e68900;
+        }
+
+        /* Register */
+        .register {
+            text-align: center;
+            margin-top: 22px;
+            color: #666;
+        }
+
+        .register a {
+            color: #ff9800;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .register a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        /* Mobile */
+        @media (max-width: 500px) {
+            nav {
+                padding: 15px 5%;
+            }
+
+            nav h1 {
+                font-size: 20px;
+            }
+
+            nav a {
+                margin-left: 10px;
+            }
+
+            .login-box {
+                padding: 25px;
+            }
+
+            .options {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <h1>MyShop</h1>
+
+        <div>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="cart.html">Cart</a>
+        </div>
+    </nav>
+
+    <!-- Login -->
+    <div class="login-container">
+
+        <div class="login-box">
+
+            <h2>Welcome Back!</h2>
+
+            <p class="subtitle">
+                Login to your MyShop account
+            </p>
+
+            <form id="loginForm">
+
+                <!-- Email -->
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="password-box">
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="show-password"
+                            onclick="togglePassword()"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- Options -->
+                <div class="options">
+
+                    <label class="remember">
+                        <input
+                            type="checkbox"
+                            id="remember"
+                        >
+
+                        Remember me
+                    </label>
+
+                    <a
+                        href="#"
+                        class="forgot-password"
+                        onclick="forgotPassword()"
+                    >
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+                <!-- Login -->
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+                    Login
+                </button>
+
+            </form>
+
+            <!-- Register -->
+            <p class="register">
+                Don't have an account?
+                <a href="register.html">Create Account</a>
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 MyShop. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+
+        // Show / Hide Password
+        function togglePassword() {
+
+            const password =
+                document.getElementById("password");
+
+            const button =
+                document.querySelector(".show-password");
+
+            if (password.type === "password") {
+
+                password.type = "text";
+                button.textContent = "Hide";
+
+            } else {
+
+                password.type = "password";
+                button.textContent = "Show";
+
+            }
+        }
+
+
+        // Forgot Password
+        function forgotPassword() {
+
+            alert(
+                "Password reset functionality will be connected to the backend soon."
+            );
+        }
+
+
+        // Login Form
+        document
+            .getElementById("loginForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+                const email =
+                    document.getElementById("email").value;
+
+                const password =
+                    document.getElementById("password").value;
+
+                console.log("Email:", email);
+                console.log("Password:", password);
+
+                alert("Login successful!");
+
+                // Later we will send the login data
+                // to our Node.js + Express backend.
+            });
+
+    </script>
+
+</body>
+</html>
+```

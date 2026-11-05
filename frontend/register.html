@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register - MyShop</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: #222;
+            color: white;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        nav a:hover {
+            color: #4CAF50;
+        }
+
+        /* Register Container */
+        .register-container {
+            min-height: calc(100vh - 130px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+        }
+
+        .register-box {
+            background-color: white;
+            width: 100%;
+            max-width: 450px;
+            padding: 35px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .register-box h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #222;
+        }
+
+        .register-box .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #4CAF50;
+        }
+
+        /* Password */
+        .password-container {
+            position: relative;
+        }
+
+        .password-container input {
+            padding-right: 70px;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            color: #4CAF50;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Button */
+        .register-btn {
+            width: 100%;
+            padding: 13px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .register-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Login Link */
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+
+        .login-link a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 18px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            nav .links a {
+                margin-left: 10px;
+                font-size: 14px;
+            }
+
+            .register-box {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">MyShop</div>
+
+        <div class="links">
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="login.html">Login</a>
+        </div>
+    </nav>
+
+
+    <!-- Register Section -->
+    <div class="register-container">
+
+        <div class="register-box">
+
+            <h2>Create Account</h2>
+
+            <p class="subtitle">
+                Register to start shopping with MyShop
+            </p>
+
+            <form id="registerForm">
+
+                <!-- Name -->
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your full name"
+                        required
+                    >
+                </div>
+
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+                </div>
+
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+
+                    <div class="password-container">
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter password"
+                            required
+                            minlength="6"
+                        >
+
+                        <button
+                            type="button"
+                            class="show-password"
+                            onclick="togglePassword('password', this)"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+                </div>
+
+
+                <!-- Confirm Password -->
+                <div class="form-group">
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <div class="password-container">
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm your password"
+                            required
+                            minlength="6"
+                        >
+
+                        <button
+                            type="button"
+                            class="show-password"
+                            onclick="togglePassword('confirmPassword', this)"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+                </div>
+
+
+                <!-- Register Button -->
+                <button
+                    type="submit"
+                    class="register-btn"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <!-- Login Link -->
+            <div class="login-link">
+                Already have an account?
+                <a href="login.html">Login here</a>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 MyShop. All Rights Reserved.</p>
+    </footer>
+
+
+    <script>
+
+        // Show / Hide Password
+        function togglePassword(inputId, button) {
+
+            const input = document.getElementById(inputId);
+
+            if (input.type === "password") {
+
+                input.type = "text";
+                button.textContent = "Hide";
+
+            } else {
+
+                input.type = "password";
+                button.textContent = "Show";
+
+            }
+        }
+
+
+        // Register Form
+        document
+            .getElementById("registerForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+                const name =
+                    document.getElementById("name").value.trim();
+
+                const email =
+                    document.getElementById("email").value.trim();
+
+                const password =
+                    document.getElementById("password").value;
+
+                const confirmPassword =
+                    document.getElementById("confirmPassword").value;
+
+
+                // Check password length
+                if (password.length < 6) {
+
+                    alert("Password must contain at least 6 characters.");
+
+                    return;
+                }
+
+
+                // Check passwords
+                if (password !== confirmPassword) {
+
+                    alert("Passwords do not match.");
+
+                    return;
+                }
+
+
+                // Temporary registration
+                console.log("Name:", name);
+                console.log("Email:", email);
+                console.log("Password:", password);
+
+                alert(
+                    "Registration successful!\\n\\n" +
+                    "Welcome " + name + "!"
+                );
+
+                // Redirect to login page
+                window.location.href = "login.html";
+
+            });
+
+    </script>
+
+</body>
+</html>

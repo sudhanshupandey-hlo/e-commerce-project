@@ -1,0 +1,25 @@
+
+# Dependencies
+node_modules/
+backend/node_modules/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+*.temp
+
+# Operating system
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# VS Code settings
+.vscode/

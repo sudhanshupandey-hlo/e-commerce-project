@@ -1,0 +1,599 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Orders - MyShop</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        /* Navbar */
+        nav {
+            background: #222;
+            color: white;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h1 {
+            font-size: 24px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        nav a:hover {
+            color: #ff9800;
+        }
+
+        /* Main Container */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .container > h2 {
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        /* Orders */
+        .orders {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .order-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Order Header */
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .order-id {
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        .order-date {
+            color: #777;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        /* Status */
+        .status {
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .delivered {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .shipped {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .processing {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Product */
+        .product {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .product:last-child {
+            border-bottom: none;
+        }
+
+        .product img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-info h3 {
+            margin-bottom: 7px;
+        }
+
+        .product-info p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .product-price {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Order Footer */
+        .order-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+            margin-top: 10px;
+        }
+
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .view-btn {
+            padding: 10px 18px;
+            border: none;
+            background: #ff9800;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .view-btn:hover {
+            background: #e68900;
+        }
+
+        /* Empty Orders */
+        .empty-orders {
+            display: none;
+            background: white;
+            text-align: center;
+            padding: 60px 20px;
+            border-radius: 10px;
+        }
+
+        .empty-orders h2 {
+            margin-bottom: 10px;
+        }
+
+        .empty-orders p {
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .shop-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #ff9800;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .shop-btn:hover {
+            background: #e68900;
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 15px 5%;
+            }
+
+            nav h1 {
+                font-size: 20px;
+            }
+
+            nav a {
+                margin-left: 10px;
+            }
+
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .product {
+                flex-wrap: wrap;
+            }
+
+            .order-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .view-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav>
+
+        <h1>MyShop</h1>
+
+        <div>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="cart.html">Cart</a>
+            <a href="orders.html">Orders</a>
+        </div>
+
+    </nav>
+
+
+    <!-- Main -->
+    <div class="container">
+
+        <h2>My Orders</h2>
+
+        <p class="subtitle">
+            View and track all your recent orders.
+        </p>
+
+
+        <div class="orders" id="ordersContainer">
+
+
+            <!-- Order 1 -->
+            <div class="order-card">
+
+                <div class="order-header">
+
+                    <div>
+                        <div class="order-id">
+                            Order #ORD1001
+                        </div>
+
+                        <div class="order-date">
+                            Placed on October 25, 2026
+                        </div>
+                    </div>
+
+                    <span class="status delivered">
+                        Delivered
+                    </span>
+
+                </div>
+
+
+                <!-- Product -->
+                <div class="product">
+
+                    <img
+                        src="https://via.placeholder.com/80"
+                        alt="Wireless Headphones"
+                    >
+
+                    <div class="product-info">
+
+                        <h3>
+                            Wireless Headphones
+                        </h3>
+
+                        <p>
+                            Quantity: 1
+                        </p>
+
+                    </div>
+
+                    <div class="product-price">
+                        ₹1,499
+                    </div>
+
+                </div>
+
+
+                <!-- Product -->
+                <div class="product">
+
+                    <img
+                        src="https://via.placeholder.com/80"
+                        alt="Smart Watch"
+                    >
+
+                    <div class="product-info">
+
+                        <h3>
+                            Smart Watch
+                        </h3>
+
+                        <p>
+                            Quantity: 1
+                        </p>
+
+                    </div>
+
+                    <div class="product-price">
+                        ₹2,999
+                    </div>
+
+                </div>
+
+
+                <!-- Footer -->
+                <div class="order-footer">
+
+                    <div class="total">
+                        Total: ₹4,598
+                    </div>
+
+                    <button
+                        class="view-btn"
+                        onclick="viewOrder('ORD1001')"
+                    >
+                        View Details
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Order 2 -->
+            <div class="order-card">
+
+                <div class="order-header">
+
+                    <div>
+
+                        <div class="order-id">
+                            Order #ORD1002
+                        </div>
+
+                        <div class="order-date">
+                            Placed on October 22, 2026
+                        </div>
+
+                    </div>
+
+                    <span class="status shipped">
+                        Shipped
+                    </span>
+
+                </div>
+
+
+                <!-- Product -->
+                <div class="product">
+
+                    <img
+                        src="https://via.placeholder.com/80"
+                        alt="Running Shoes"
+                    >
+
+                    <div class="product-info">
+
+                        <h3>
+                            Running Shoes
+                        </h3>
+
+                        <p>
+                            Quantity: 1
+                        </p>
+
+                    </div>
+
+                    <div class="product-price">
+                        ₹2,499
+                    </div>
+
+                </div>
+
+
+                <div class="order-footer">
+
+                    <div class="total">
+                        Total: ₹2,599
+                    </div>
+
+                    <button
+                        class="view-btn"
+                        onclick="viewOrder('ORD1002')"
+                    >
+                        View Details
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Order 3 -->
+            <div class="order-card">
+
+                <div class="order-header">
+
+                    <div>
+
+                        <div class="order-id">
+                            Order #ORD1003
+                        </div>
+
+                        <div class="order-date">
+                            Placed on October 20, 2026
+                        </div>
+
+                    </div>
+
+                    <span class="status processing">
+                        Processing
+                    </span>
+
+                </div>
+
+
+                <!-- Product -->
+                <div class="product">
+
+                    <img
+                        src="https://via.placeholder.com/80"
+                        alt="Laptop"
+                    >
+
+                    <div class="product-info">
+
+                        <h3>
+                            Laptop
+                        </h3>
+
+                        <p>
+                            Quantity: 1
+                        </p>
+
+                    </div>
+
+                    <div class="product-price">
+                        ₹55,000
+                    </div>
+
+                </div>
+
+
+                <div class="order-footer">
+
+                    <div class="total">
+                        Total: ₹55,100
+                    </div>
+
+                    <button
+                        class="view-btn"
+                        onclick="viewOrder('ORD1003')"
+                    >
+                        View Details
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Empty Orders -->
+        <div class="empty-orders" id="emptyOrders">
+
+            <h2>No Orders Yet</h2>
+
+            <p>
+                You haven't placed any orders yet.
+            </p>
+
+            <a
+                href="products.html"
+                class="shop-btn"
+            >
+                Start Shopping
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            &copy; 2026 MyShop. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        function viewOrder(orderId) {
+
+            alert(
+                "Opening details for " + orderId
+            );
+
+            // Later this button will open a
+            // real order details page and fetch
+            // order information from our backend.
+        }
+
+
+        // Example function to show empty orders
+        function showEmptyOrders() {
+
+            document.getElementById(
+                "ordersContainer"
+            ).style.display = "none";
+
+            document.getElementById(
+                "emptyOrders"
+            ).style.display = "block";
+        }
+
+    </script>
+
+</body>
+
+</html>
+```
